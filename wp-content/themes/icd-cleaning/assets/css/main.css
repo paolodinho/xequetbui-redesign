@@ -220,3 +220,45 @@ form.search input:focus{outline:0}form.search button{width:74px;border:0;backgro
 .lay__s .cats .cats__kids li a span{flex:1}
 .lay__s .cats .cats__kids li a em{font-style:normal;font-size:12px;color:#8A948E}
 .lay__s .cats .cats__kids li a.on{color:var(--brand-dk);font-weight:700;background:var(--green-050);box-shadow:inset 3px 0 0 var(--brand)}
+
+/* hover danh mục dọc = cam thương hiệu */
+.nav ul.nav__mega li a:hover,.bn__cats li a:hover,.has-kids:hover>a,.cat-sub li a:hover,.lay__s .cats li a:hover,.lay__s .cats .cats__kids li a:hover{background:#E26200!important;color:#fff!important}
+.nav ul.nav__mega li a:hover i,.bn__cats li a:hover i,.has-kids:hover>a i,.cat-sub li a:hover em,.lay__s .cats .cats__kids li a:hover em{color:#fff!important}
+.cat-sub__all a:hover{color:#fff!important}
+
+/* hover chung = cam thương hiệu */
+a:hover,.nav .menu a:hover,.nav .menu .current-menu-item a:hover,.hd__top a:hover,.crumb a:hover,.card a:hover,.card__t:hover,.ft a:hover,.pd a:hover,.prose a:hover{color:#E26200}
+.btn:hover,.btn--o:hover,.hd__qt:hover,.search button:hover,.nav__cat:hover,button[type=submit]:hover{background:var(--btn)!important;border-color:#E26200!important;color:#fff!important}
+.card .btn:hover{background:#E26200!important;color:#fff!important}
+.callfab:hover{background:var(--btn-h)}
+
+/* ===== menu di động: nút 3 gạch + ngăn kéo ===== */
+.mtog{display:none;width:44px;height:44px;border:0;border-radius:var(--r);background:rgba(255,255,255,.16);cursor:pointer;flex:none;padding:0;place-content:center;gap:5px}
+.mtog span{display:block;width:22px;height:2px;background:#fff;border-radius:2px}
+.mnav{position:fixed;inset:0;z-index:100}.mnav[hidden]{display:none}
+.mnav__bg{position:absolute;inset:0;background:rgba(10,20,15,.5)}
+.mnav__p{position:absolute;left:0;top:0;bottom:0;width:min(86vw,340px);background:#fff;overflow-y:auto;padding-bottom:24px;box-shadow:6px 0 24px rgba(0,0,0,.2)}
+.mnav__h{display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 18px;height:56px;background:var(--brand-dk);color:#fff;font:700 16px var(--display)}
+.mnav__h button{width:44px;height:44px;border:0;background:none;color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.mnav__s{padding:16px 18px 8px;font:700 12px var(--display);text-transform:uppercase;letter-spacing:.06em;color:#6B766F}
+.mnav ul{margin:0;padding:0;list-style:none}
+.mnav li>a,.mnav summary{display:flex;justify-content:space-between;align-items:center;padding:0 18px;min-height:46px;border-bottom:1px solid var(--line);color:var(--ink);font:500 15px/1.3 var(--body);cursor:pointer;list-style:none}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary::after{content:"+";font-size:20px;color:#8A948E}.mnav details[open]>summary::after{content:"\2212"}
+.mnav details[open]>summary{background:#F1F8F4;color:var(--brand-dk);font-weight:700}
+.mnav details ul li a{padding-left:32px;background:#FAFCFB;font-size:14px}
+.mnav em{font-style:normal;font-size:12px;color:#8A948E}
+.mnav li>a:hover,.mnav summary:hover{background:#E26200;color:#fff}
+.mnav li>a:hover em{color:#fff}
+.mnav__call{display:flex;align-items:center;justify-content:center;margin:18px 18px 0;min-height:48px;border-radius:var(--r);background:#E26200;color:#fff;font:700 15px var(--display)}
+.mnav__call:hover{background:#C95700;color:#fff}
+.mnav-open{overflow:hidden}
+@media(max-width:1024px){
+.mtog{display:grid}.nav{display:none}
+.hd__main{padding:10px 0 12px}
+.hd__in{flex-wrap:wrap;height:auto;row-gap:10px;gap:10px}
+.mtog{order:1}.logo{order:2;flex:1}.hd__tel{order:3;margin-left:0}form.search{order:4;flex:0 0 100%;max-width:none}
+.hd__tel span{display:none}.hd__tel i{width:44px;height:44px}
+form.search input{height:44px}form.search button{width:52px;height:44px}
+.logo img{height:40px}.logo span{display:none}
+}
