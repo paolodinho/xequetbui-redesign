@@ -262,3 +262,28 @@ a:hover,.nav .menu a:hover,.nav .menu .current-menu-item a:hover,.hd__top a:hove
 form.search input{height:44px}form.search button{width:52px;height:44px}
 .logo img{height:40px}.logo span{display:none}
 }
+
+/* === Header sáng 01/10: logo đặt thẳng trên nền trắng, bỏ khung trắng thô; xanh giữ ở dải trên + nút/icon === */
+.hd{background:#fff;color:var(--ink)}
+.hd__top{background:var(--brand);color:#fff}
+.hd__main{border-bottom:1px solid var(--line)}
+.logo img{background:none;padding:0;border-radius:0;height:58px}
+.logo span{color:var(--green-700);padding-left:12px;border-left:2px solid var(--brand);line-height:1.2}
+form.search input{box-shadow:inset 0 0 0 1.5px var(--brand)}
+form.search button{background:var(--btn)}
+.hd__tel{color:var(--ink)}.hd__tel small{color:var(--muted);opacity:1}.hd__tel b{color:var(--green-700)}
+.hd__tel i{background:var(--brand);color:#fff!important}
+.hd__qt{background:var(--btn);color:#fff}
+.mtog{background:var(--green-050);box-shadow:inset 0 0 0 1px #CBE7D6}.mtog span{background:var(--green-700)}
+@media(max-width:1024px){.logo img{height:44px}}
+@media(max-width:640px){.hd{border-top:4px solid var(--brand)}.logo img{height:40px}}
+
+/* === Tin tức mới 01/10: ảnh không cắt mất đầu người, khung thẻ gọn === */
+.news__f{border:1px solid var(--line);background:#fff;overflow:hidden;text-decoration:none}
+.news__f img{aspect-ratio:16/9;object-fit:cover;object-position:50% 12%}
+.news__f time,.news__f strong,.news__f p{margin-left:18px;margin-right:18px}
+.news__f strong{color:var(--ink);text-decoration:none;margin-top:14px}.news__f:hover strong{color:var(--brand-dk);text-decoration:none}
+.news__f p{color:var(--text);margin-bottom:18px}
+.news__l a{padding:10px;border:1px solid var(--line);background:#fff;align-items:center;grid-template-columns:120px 1fr}
+.news__l a:hover{border-color:var(--brand)}.news__l a:hover strong{text-decoration:none}
+.news__l img{width:120px;height:80px;object-fit:cover;object-position:50% 20%}
