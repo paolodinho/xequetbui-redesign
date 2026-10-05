@@ -328,3 +328,12 @@ form.search button{background:var(--btn)}
  .lay__s h4.lay__tog::after{content:"+";font:400 24px/1 var(--display)}
  .lay__s.is-open h4.lay__tog::after{content:"\2212"}
 }
+
+/* hero: cum 6 san pham tieu bieu, 2 hang */
+.bn__pics--g{left:46%}
+.bn__pics--g a{display:block}.bn__pics--g img{object-position:center bottom;filter:drop-shadow(0 10px 10px rgba(0,0,0,.18))}
+.bn__pics--g .q1{left:2%;top:5%;width:24%;height:42%;z-index:1}.bn__pics--g .q2{left:34%;top:1%;width:26%;height:46%;z-index:1}.bn__pics--g .q3{right:1%;top:7%;width:34%;height:40%;z-index:1}
+.bn__pics--g .q4{left:0;bottom:4%;width:30%;height:48%;z-index:3}.bn__pics--g .q5{left:27%;bottom:1%;width:42%;height:60%;z-index:4}.bn__pics--g .q6{right:0;bottom:4%;width:38%;height:50%;z-index:3}
+.bn__pics--g::after{content:"";position:absolute;left:2%;right:2%;bottom:2%;height:3px;background:rgba(0,0,0,.05);border-radius:3px}
+@media(max-width:1024px){.bn__pics--g{left:44%}}
+@media(max-width:760px){.bn__pics--g{left:auto;position:relative;height:300px;margin:6px 0 0}.bn__pics--g .q1{left:2%;top:2%;width:28%;height:44%}.bn__pics--g .q2{left:34%;top:0;width:30%;height:46%}.bn__pics--g .q3{right:1%;top:4%;width:36%;height:42%}.bn__pics--g .q4{left:-2%;bottom:2%;width:36%;height:52%}.bn__pics--g .q5{left:28%;bottom:0;width:46%;height:64%}.bn__pics--g .q6{right:-2%;bottom:2%;width:40%;height:54%}}
