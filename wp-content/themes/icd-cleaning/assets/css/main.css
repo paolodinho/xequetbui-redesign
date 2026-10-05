@@ -309,3 +309,15 @@ form.search button{background:var(--btn)}
 .promo--img::after{display:none}
 .promo--img .promo__d{display:none}
 @media(max-width:1024px){.promo--img{background:linear-gradient(165deg,#00A24A,#00803A)}}
+
+/* Mobile: mở rộng vùng nội dung (trước: body 15 + wrap 15 + box 15 = chỉ còn ~76% bề ngang) */
+@media(max-width:760px){
+ body{padding-left:0!important;padding-right:0!important}
+ .wrap{padding-left:8px;padding-right:8px}
+ .bn .wrap{padding-left:0;padding-right:0}
+ .box{padding:12px 8px;margin-bottom:10px}
+ .box__h{padding:0 2px}
+ .grid{padding:0}
+}
+/* Banner danh mục hàng ngắn (5 sản phẩm): dùng bản ảnh tỉ lệ vuông banner-N-s.jpg */
+.promo--s.promo--img{background-position:center center}
