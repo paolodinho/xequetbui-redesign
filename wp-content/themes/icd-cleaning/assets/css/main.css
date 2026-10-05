@@ -321,3 +321,10 @@ form.search button{background:var(--btn)}
 }
 /* Banner danh mục hàng ngắn (5 sản phẩm): dùng bản ảnh tỉ lệ vuông banner-N-s.jpg */
 .promo--s.promo--img{background-position:center center}
+/* Mobile/tablet: menu danh mục thu gọn (JS bật .is-open) */
+@media(max-width:1024px){
+ .lay__s .cats{display:none}.lay__s.is-open .cats{display:block}
+ .lay__s h4.lay__tog{cursor:pointer;justify-content:space-between}
+ .lay__s h4.lay__tog::after{content:"+";font:400 24px/1 var(--display)}
+ .lay__s.is-open h4.lay__tog::after{content:"\2212"}
+}

@@ -22,3 +22,15 @@
   }, { rootMargin: '0px 0px -8% 0px' });
   els.forEach(function (el, i) { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('reveal'); io.observe(el); } });
 })();
+
+/* Mobile: menu danh mục ở trang danh mục thu gọn sẵn, bấm tiêu đề "Danh mục" để mở - nội dung hiện ngay màn đầu */
+(function () {
+  var mq = window.matchMedia('(max-width:1024px)');
+  document.querySelectorAll('.lay__s').forEach(function (s) {
+    var h = s.querySelector('h4'), c = s.querySelector('.cats'); if (!h || !c) return;
+    h.setAttribute('role', 'button'); h.setAttribute('tabindex', '0'); h.setAttribute('aria-expanded', 'false'); h.classList.add('lay__tog');
+    function set(o) { s.classList.toggle('is-open', o); h.setAttribute('aria-expanded', o); }
+    h.addEventListener('click', function () { if (mq.matches) set(!s.classList.contains('is-open')); });
+    h.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && mq.matches) { e.preventDefault(); set(!s.classList.contains('is-open')); } });
+  });
+})();
