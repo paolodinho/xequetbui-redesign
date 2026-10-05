@@ -303,3 +303,9 @@ form.search button{background:var(--btn)}
 .bn__cats li a:hover{border-left-color:var(--dot,#00B050)}
 .bn__cats li a>span::before{flex:none}
 @media(max-width:1024px){.promo{padding:16px 16px;min-height:0}.promo__d{display:none}.promo strong{font-size:18px}}
+
+/* Banner danh mục: ảnh nền riêng từng danh mục (assets/img/banner-N.jpg), chữ HTML đè lên phần trên */
+.promo--img{background:var(--pimg) center bottom/cover no-repeat}
+.promo--img::after{display:none}
+.promo--img .promo__d{display:none}
+@media(max-width:1024px){.promo--img{background:linear-gradient(165deg,#00A24A,#00803A)}}
