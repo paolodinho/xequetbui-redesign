@@ -287,3 +287,19 @@ form.search button{background:var(--btn)}
 .news__l a{padding:10px;border:1px solid var(--line);background:#fff;align-items:center;grid-template-columns:120px 1fr}
 .news__l a:hover{border-color:var(--brand)}.news__l a:hover strong{text-decoration:none}
 .news__l img{width:120px;height:80px;object-fit:cover;object-position:50% 20%}
+
+/* === Góp ý 03/10: banner danh mục dọc (không lấy ảnh sản phẩm đầu) + menu danh mục to, nhiều màu hơn === */
+.promo{background:linear-gradient(165deg,#00A24A 0%,#00803A 62%,#006B30 100%);color:#fff;border:0;padding:22px 20px 74px;gap:10px;min-height:260px}
+.promo::after{display:none}
+.promo--img::after{display:block;content:"";position:absolute;left:12px;right:12px;bottom:70px;height:42%;min-height:110px;background:var(--pimg) center/contain no-repeat;mix-blend-mode:normal}
+.promo__k{display:inline-block;align-self:flex-start;background:rgba(255,255,255,.18);color:#fff;font:700 11px/1 var(--display);letter-spacing:.06em;padding:6px 10px;border-radius:2px}
+.promo strong{color:#fff;font:700 22px/1.25 var(--display)}
+.promo__d{position:relative;z-index:1;color:rgba(255,255,255,.88);font:400 13px/1.5 var(--body)}
+.promo__c{background:var(--orange);color:#1b1b1b;font:700 13px var(--display);padding:12px 8px}
+.promo:hover .promo__c,.promo__c:hover{background:#fff;color:var(--brand-dk)}
+.bn__cats li a{font:600 15px/1.3 var(--display);min-height:46px;padding:9px 16px 9px 14px;color:#1d3b2a;gap:10px;border-left:4px solid transparent}
+.bn__cats li a>span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:10px;background:var(--dot,#00B050);vertical-align:1px}
+.bn__cats li:nth-child(5n+1){--dot:#00B050}.bn__cats li:nth-child(5n+2){--dot:#F88000}.bn__cats li:nth-child(5n+3){--dot:#1F6FB5}.bn__cats li:nth-child(5n+4){--dot:#12A8A0}.bn__cats li:nth-child(5n+5){--dot:#8A55C4}
+.bn__cats li a:hover{border-left-color:var(--dot,#00B050)}
+.bn__cats li a>span::before{flex:none}
+@media(max-width:1024px){.promo{padding:16px 16px;min-height:0}.promo__d{display:none}.promo strong{font-size:18px}}
