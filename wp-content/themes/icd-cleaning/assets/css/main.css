@@ -439,3 +439,10 @@ form.search button{background:var(--btn)}
 .qcart__l button{border:0;background:none;font-size:22px;color:#999;cursor:pointer}.qcart__e{color:var(--muted);font-size:14px;margin:0}.qcart__e[hidden]{display:none}
 .qcart__go.is-off{opacity:.45;pointer-events:none}
 @media (max-width:760px){.posts--1 .pc{grid-template-columns:1fr}.posts--1 .pc img,.pc__ph{width:100%;height:190px}.totop{bottom:150px}.cb input[name=phone]{flex-basis:100%}.btn--hot{width:100%}}
+/* tin tuyển dụng */
+.job{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 6px}
+.job li{display:flex;flex-direction:column;gap:2px;padding:7px 12px;background:var(--green-050);border:1px solid #CFE8D8;border-radius:8px;min-width:120px}
+.job small{font:500 11px var(--body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.job b{font:700 14px/1.3 var(--display);color:var(--ink)}
+.job__s{background:#FFF3E4;border-color:#F6C27C}.job__s b{color:#B85A00}
+.job__d b{color:#D6001C}.job__d.is-off{background:#f1f1f1;border-color:#ddd}.job__d.is-off b{color:#777}
+.job__go{margin:4px 0 18px}
