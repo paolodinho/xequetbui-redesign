@@ -6,7 +6,7 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') mset(false); });
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-sp]'); if (!a) return;
-    var i = document.getElementById('sp'); if (i) i.value = a.getAttribute('data-sp');
+    window.icdSyncSp && window.icdSyncSp(a.getAttribute('data-sp'));
   });
   document.querySelectorAll('[data-clamp]').forEach(function (el) {
     if (el.scrollHeight < 620) return;
@@ -40,6 +40,15 @@
   var KEY = 'icd_quote_cart', cart = [];
   try { cart = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { cart = []; }
   var panel = document.getElementById('qcart'), list = document.querySelector('[data-cart-list]'), empty = document.querySelector('[data-cart-empty]');
+  var sp0 = (document.getElementById('sp') || {}).value || '';
+  window.icdSyncSp = function (extra) {
+    var i = document.getElementById('sp'); if (!i) return;
+    var names = cart.map(function (c) { return c.t; });
+    if (extra && names.indexOf(extra) < 0) names.push(extra);
+    if (!extra && !names.length) names = sp0 ? [sp0] : [];
+    else if (sp0 && names.indexOf(sp0) < 0 && !cart.length && !extra) names.push(sp0);
+    i.value = names.join('; ');
+  };
   function save() { try { localStorage.setItem(KEY, JSON.stringify(cart)); } catch (e) {} }
   function render() {
     document.querySelectorAll('[data-cart-n]').forEach(function (n) { n.textContent = cart.length; n.hidden = !cart.length; });
@@ -51,6 +60,7 @@
       li.appendChild(s); li.appendChild(b); list.appendChild(li);
     });
     if (empty) empty.hidden = !!cart.length;
+    window.icdSyncSp && window.icdSyncSp();
     var go = document.querySelector('[data-cart-send]'); if (go) go.classList.toggle('is-off', !cart.length);
   }
   function open(o) { if (!panel) return; panel.hidden = !o; document.documentElement.classList.toggle('mnav-open', o); }
@@ -60,7 +70,7 @@
     if (e.target.closest('[data-cart-open]')) { open(true); return; }
     if (e.target.closest('[data-cart-close]')) { open(false); return; }
     var g = e.target.closest('[data-cart-send]');
-    if (g) { open(false); var i = document.getElementById('sp'); if (i && cart.length) i.value = cart.map(function (c) { return c.t; }).join('; '); }
+    if (g) { open(false); window.icdSyncSp(); }
   });
   render();
   var tt = document.querySelector('.totop');
