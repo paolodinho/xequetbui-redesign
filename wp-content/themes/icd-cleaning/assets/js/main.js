@@ -66,7 +66,7 @@
   function open(o) { if (!panel) return; panel.hidden = !o; document.documentElement.classList.toggle('mnav-open', o); }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-addq]');
-    if (a) { var id = a.getAttribute('data-addq'); if (!cart.some(function (c) { return c.id === id; })) cart.push({ id: id, t: a.getAttribute('data-t') }); save(); render(); a.classList.add('is-added'); a.innerHTML = '&#10003; Đã thêm vào giỏ'; setTimeout(function () { open(true); }, 150); return; }
+    if (a) { var id = a.getAttribute('data-addq'); if (!cart.some(function (c) { return c.id === id; })) cart.push({ id: id, t: a.getAttribute('data-t') }); save(); render(); a.classList.add('is-added'); a.innerHTML = '&#10003; Đã thêm'; setTimeout(function () { open(true); }, 150); return; }
     if (e.target.closest('[data-cart-open]')) { open(true); return; }
     if (e.target.closest('[data-cart-close]')) { open(false); return; }
     var g = e.target.closest('[data-cart-send]');

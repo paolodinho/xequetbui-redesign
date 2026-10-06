@@ -446,3 +446,5 @@ form.search button{background:var(--btn)}
 .job__s{background:#FFF3E4;border-color:#F6C27C}.job__s b{color:#B85A00}
 .job__d b{color:#D6001C}.job__d.is-off{background:#f1f1f1;border-color:#ddd}.job__d.is-off b{color:#777}
 .job__go{margin:4px 0 18px}
+
+.card__q{white-space:nowrap}.promo strong{text-wrap:balance}
