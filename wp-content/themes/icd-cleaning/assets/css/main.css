@@ -602,3 +602,14 @@ form.search button{background:var(--btn)}
 @media(max-width:700px){.promo-c ol{grid-template-columns:1fr}.promo-c__h span{display:none}}
 /* bỏ vòng sáng nền sau ảnh máy trong banner */
 .promo--c .promo__pic{background:none}
+
+/* banner dãy sản phẩm v5: chữ mềm, rõ thứ bậc, bỏ nhãn trùng tiêu đề khối */
+.promo--c .promo__t{display:none}
+.promo.promo--c{padding-top:22px}
+.promo--c strong{margin:0;padding-top:14px;position:relative;font:800 21px/1.32 var(--display);text-transform:none;letter-spacing:0;color:#fff;text-wrap:initial}
+.promo--c strong::before{content:"";position:absolute;left:0;top:0;width:38px;height:3px;border-radius:2px;background:#FFD84A}
+.promo--c strong .ph,.promo--c strong .ph:last-child{display:block;white-space:nowrap;background:none;padding:0;margin:0;border-radius:0}
+.promo--c strong .ph:last-child{color:#FFD84A}
+@media(max-width:1024px){.promo--c strong{padding-top:0}.promo--c strong::before{display:none}.promo--c strong .ph,.promo--c strong .ph:last-child{display:inline-block;margin-right:.3em}}
+@media(max-width:560px){.promo--c strong .ph,.promo--c strong .ph:last-child{display:block;margin:0}}
+.promo--c strong{font-size:23px}.promo--c .promo__pic{padding-top:22px}.promo--c .promo__pic img{width:100%;max-width:230px}
