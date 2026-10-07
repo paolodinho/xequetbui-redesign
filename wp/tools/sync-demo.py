@@ -36,6 +36,7 @@ for r, ds, fs in os.walk('.'):
             t = t.replace('http://xequetbui.local/', pre).replace('https://xequetbui.local/', pre)
             t = re.sub(r"(--[a-z]+:url\(['\"]?)(?:\.\./)*(wp-content/)", r"\1" + PFX + r"\2", t)
             t = re.sub(r'(wp-content/themes/icd-cleaning/assets/(?:css|js)/[\w.-]+\.(?:css|js))(?![\w?])', r'\1?v=' + str(int(__import__('time').time())), t)  # chống cache trình duyệt
+            t = re.sub(r"(wp-content/uploads/icd-cutout/\d+\.png)(?![\w?])", r"\1?v=" + str(int(__import__('time').time())), t)  # ảnh máy đã tách: đổi tên query để trình duyệt tải bản mới
             if 'noindex' not in t: t = t.replace('<head>', '<head>\n<meta name="robots" content="noindex, nofollow">', 1)
         if t != s: wr(p, t)
         for m in re.finditer(r'wp-content/uploads/[^"\'\s,)<>]+\.(?:jpe?g|png|webp|gif|svg)', t): need.add(urllib.parse.unquote(m.group(0)))
@@ -66,6 +67,7 @@ while True:
         except Exception: continue
         h = ver.sub('', h).replace('http://xequetbui.local/', '').replace('https://xequetbui.local/', '')
         h = re.sub(r"(wp-content/themes/icd-cleaning/assets/(?:css|js)/[\w.-]+\.(?:css|js))(?![\w?])", r"\1?v=" + str(int(__import__('time').time())), h)
+        h = re.sub(r"(wp-content/uploads/icd-cutout/\d+\.png)(?![\w?])", r"\1?v=" + str(int(__import__('time').time())), h)  # ảnh máy đã tách: đổi tên query để trình duyệt tải bản mới
         if 'noindex' not in h: h = h.replace('<head>', '<head>\n<meta name="robots" content="noindex, nofollow">', 1)
         wr('%s-page-%s.html' % (slug, n), h)
         for m in re.finditer(r'wp-content/uploads/[^"\'\s,)<>]+\.(?:jpe?g|png|webp|gif|svg)', h): need.add(urllib.parse.unquote(m.group(0)))

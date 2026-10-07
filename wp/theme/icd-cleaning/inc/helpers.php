@@ -118,7 +118,7 @@ function icd_cutout($post_id) {
         if ($maxx > $minx && $maxy > $miny) { $c = imagecrop($o, ['x' => $minx, 'y' => $miny, 'width' => $maxx - $minx + 1, 'height' => $maxy - $miny + 1]); if ($c) { imagealphablending($c, false); imagesavealpha($c, true); imagedestroy($o); $o = $c; } }
         wp_mkdir_p($dir); imagepng($o, $file, 6); imagedestroy($o);
     }
-    return $up['baseurl'] . '/icd-cutout/' . $tid . '.png';
+    return $up['baseurl'] . '/icd-cutout/' . $tid . '.png?v=' . filemtime($file);
 }
 
 /** Khối gợi ý đọc tiếp (bài tư vấn) - giữ người xem ở lại site. */
