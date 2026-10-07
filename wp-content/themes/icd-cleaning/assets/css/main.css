@@ -586,3 +586,17 @@ form.search button{background:var(--btn)}
 .pd__l .promo-box li::before{width:20px;height:20px;font-size:11px;line-height:20px;box-shadow:none}
 .pd__l .promo-box p{margin:10px 0 0;padding-top:8px;font-size:12.5px}
 @media(max-width:700px){.pd__l .promo-box ol{grid-template-columns:1fr}.pd__l .promo-ban{grid-template-columns:1fr;grid-template-areas:"k" "h" "s" "b"}.pd__l .promo-ban__b{justify-self:start;margin-top:8px}}
+
+/* khuyến mại v4: thẻ gọn trong cột thông tin, thấy ngay ở màn hình đầu */
+.pd__sum{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.promo-c{margin:0 0 12px;border:1px solid #F3B27A;border-radius:10px;overflow:hidden;background:#FFF8EF}
+.promo-c__h{display:flex;align-items:center;gap:8px;padding:8px 14px;color:#fff;background:linear-gradient(100deg,#C8001A,#E8420C 65%,#FF7A00)}
+.promo-c__h svg{flex:none}.promo-c__h b{font:800 14px/1.2 var(--display);text-transform:uppercase;letter-spacing:.02em;white-space:nowrap}
+.promo-c__h span{font:500 13px var(--body);opacity:.95;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.promo-c__h em{margin-left:auto;font:700 12px var(--display);font-style:normal;background:#FFD400;color:#7A1200;padding:3px 9px;border-radius:3px;white-space:nowrap}
+.promo-c ol{list-style:none;margin:0;padding:10px 14px 10px;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;counter-reset:pc}
+.promo-c li{counter-increment:pc;position:relative;padding-left:24px;font-size:13.5px;line-height:1.4;color:var(--ink)}
+.promo-c li::before{content:counter(pc);position:absolute;left:0;top:1px;width:17px;height:17px;border-radius:50%;background:#E8420C;color:#fff;font:700 10.5px/17px var(--display);text-align:center}
+.promo-c li a{color:#C8001A;font-weight:700;white-space:nowrap}
+.pd__i .cb{margin-bottom:10px}
+@media(max-width:700px){.promo-c ol{grid-template-columns:1fr}.promo-c__h span{display:none}}
