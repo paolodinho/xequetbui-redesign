@@ -10,12 +10,12 @@ $cats = get_the_terms($id, 'product_cat'); $cat = $cats ? $cats[0] : null; ?>
       <?php if (has_excerpt()) : ?><div class="pd__sum"><?php echo wp_kses_post(wpautop(get_the_excerpt() ? get_post_field('post_excerpt', $id) : '')); ?></div><?php endif; ?>
       <div class="pd__cta"><a class="btn" href="#bao-gia" data-sp="<?php echo esc_attr(get_the_title()); ?>">Nhận báo giá</a><a class="btn btn--ghost" href="tel:<?php echo esc_attr(icd('hotline_tel')); ?>">Gọi <?php echo esc_html(icd('hotline')); ?></a><button class="btn btn--q" type="button" data-addq="<?php echo (int) $id; ?>" data-t="<?php echo esc_attr(get_the_title()); ?>"><?php echo icd_ico('cart'); ?> Thêm vào giỏ báo giá</button></div>
       <?php icd_callback(); ?>
+      <?php icd_promo_box($id); ?>
       <ul class="pd__u"><li><i><?php echo icd_ico('ok'); ?></i>Hàng chính hãng, đầy đủ CO CQ</li><li><i><?php echo icd_ico('truck'); ?></i>Giao hàng, lắp đặt, hướng dẫn tại chỗ</li><li><i><?php echo icd_ico('shield'); ?></i>Bảo hành, bảo dưỡng và phụ tùng thay thế</li></ul>
       <?php if ($cat) echo '<p class="pd__m">Danh mục: <a href="' . esc_url(get_term_link($cat)) . '">' . esc_html($cat->name) . '</a></p>'; ?>
     </div>
   </div>
   <nav class="tabs" aria-label="Mục trong trang"><a href="#chi-tiet">Thông tin chi tiết</a><a href="#cung-loai">Sản phẩm cùng loại</a><a href="#tu-van">Tư vấn liên quan</a><a href="#bao-gia">Nhận báo giá</a></nav>
-  <?php icd_promo_box($id); ?>
   <div class="prose prose--box prose--pd" id="chi-tiet"><h2>Thông tin chi tiết</h2><div data-toc-after></div><?php the_content(); $yt = get_post_meta($id, '_icd_youtube', true); if ($yt) { $vid = preg_match('~(?:v=|youtu\.be/|embed/)([\w-]{11})~', $yt, $m) ? $m[1] : ''; if ($vid) echo '<h2>Video giới thiệu</h2><iframe loading="lazy" src="https://www.youtube.com/embed/' . esc_attr($vid) . '" title="Video sản phẩm" allowfullscreen></iframe>'; } ?></div>
 </article>
 <?php if ($cat) { $rel = get_posts(['post_type' => 'product', 'numberposts' => 5, 'post__not_in' => [$id], 'tax_query' => [['taxonomy' => 'product_cat', 'field' => 'term_id', 'terms' => $cat->term_id]]]);

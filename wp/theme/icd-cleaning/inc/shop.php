@@ -41,7 +41,8 @@ add_action('add_meta_boxes', function () {
         $g = fn($k) => esc_attr(get_post_meta($post->ID, $k, true));
         wp_nonce_field('icd_sell', '_icd_sell');
         echo '<p><b>Giá</b>: nhập ở ô "Dữ liệu sản phẩm" bên dưới (Giá thông thường / Giá khuyến mại). Khách chỉ thấy giá khi bật "Hiển thị giá cho khách" ở Cài đặt ICD > Khối sản phẩm; mặc định ẩn, hiện "Liên hệ báo giá". Dữ liệu giá vẫn được lưu để dùng cho Google Shopping.</p>';
-        echo '<p><label><b>Nội dung khuyến mại đi kèm</b> (mỗi dòng 1 ưu đãi)</label><textarea name="icd_promo" rows="5" style="width:100%">' . esc_textarea(get_post_meta($post->ID, '_icd_promo', true)) . '</textarea></p>';
+        echo '<p><label><b>Nội dung khuyến mại đi kèm</b> (mỗi dòng 1 ưu đãi; muốn có link Xem chi tiết thì viết: nội dung | https://link)</label><textarea name="icd_promo" rows="5" style="width:100%">' . esc_textarea(get_post_meta($post->ID, '_icd_promo', true)) . '</textarea></p>';
+        echo '<p><label><b>Banner ưu đãi: dòng chữ lớn</b> (vd GIẢM 10%, để trống nếu không cần banner)</label><input name="icd_promo_head" value="' . $g('_icd_promo_head') . '" style="width:100%"></p><p><label><b>Banner ưu đãi: dòng phụ</b></label><input name="icd_promo_sub" value="' . $g('_icd_promo_sub') . '" style="width:100%"></p>';
         echo '<p><label><b>Khuyến mại áp dụng đến hết ngày</b> (vd 31/10/2026)</label> <input name="icd_promo_end" value="' . $g('_icd_promo_end') . '" style="width:160px"></p>';
         echo '<p><label><b>Link video YouTube</b> (hiện ở phần mô tả sản phẩm)</label><input name="icd_youtube" value="' . $g('_icd_youtube') . '" style="width:100%" placeholder="https://www.youtube.com/watch?v=..."></p>';
         echo '<p><label><input type="checkbox" name="icd_new" value="1"' . checked(get_post_meta($post->ID, '_icd_new', true), '1', false) . '> Gắn nhãn NEW nhấp nháy (tự gắn cho sản phẩm đăng trong 30 ngày gần nhất)</label></p>';
@@ -55,7 +56,7 @@ add_action('add_meta_boxes', function () {
 });
 add_action('save_post_product', function ($id) {
     if (!isset($_POST['_icd_sell']) || !wp_verify_nonce($_POST['_icd_sell'], 'icd_sell') || !current_user_can('edit_post', $id)) return;
-    foreach (['promo' => '_icd_promo', 'promo_end' => '_icd_promo_end', 'youtube' => '_icd_youtube', 'brand' => '_icd_brand', 'gtin' => '_icd_gtin', 'mpn' => '_icd_mpn', 'cond' => '_icd_cond', 'stock' => '_icd_stock'] as $f => $k)
+    foreach (['promo' => '_icd_promo', 'promo_end' => '_icd_promo_end', 'promo_head' => '_icd_promo_head', 'promo_sub' => '_icd_promo_sub', 'youtube' => '_icd_youtube', 'brand' => '_icd_brand', 'gtin' => '_icd_gtin', 'mpn' => '_icd_mpn', 'cond' => '_icd_cond', 'stock' => '_icd_stock'] as $f => $k)
         update_post_meta($id, $k, $f === 'promo' ? sanitize_textarea_field($_POST['icd_' . $f] ?? '') : sanitize_text_field($_POST['icd_' . $f] ?? ''));
     update_post_meta($id, '_icd_new', !empty($_POST['icd_new']) ? '1' : '0');
 });
@@ -80,8 +81,12 @@ function icd_schema_extra($pr, $p) {
 function icd_promo_box($id) {
     $t = trim((string) get_post_meta($id, '_icd_promo', true)); if (!$t) return;
     $end = get_post_meta($id, '_icd_promo_end', true);
-    echo '<div class="promo-box"><h3>Khuyến mại đi kèm</h3><ol>';
-    foreach (preg_split('/\R/u', $t) as $l) if (trim($l)) echo '<li>' . esc_html(trim($l)) . '</li>';
+    $h = trim((string) get_post_meta($id, '_icd_promo_head', true)); $sub = trim((string) get_post_meta($id, '_icd_promo_sub', true));
+    $gift = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 010 5"/></svg>';
+    if ($h) echo '<div class="promo-ban"><span class="promo-ban__k">Ưu đãi đặc biệt</span><b>' . esc_html($h) . '</b>' . ($sub ? '<em>' . esc_html($sub) . '</em>' : '') . '<a href="#bao-gia" class="promo-ban__b">Nhận ngay</a></div>';
+    echo '<div class="promo-box"><h3>' . $gift . ' Khuyến mại đi kèm</h3><ol>';
+    foreach (preg_split('/\R/u', $t) as $l) { $l = trim($l); if (!$l) continue; $p = array_map('trim', explode('|', $l, 2));
+        echo '<li><span>' . esc_html($p[0]) . (!empty($p[1]) ? ' <a href="' . esc_url($p[1]) . '">Xem chi tiết</a>' : '') . '</span></li>'; }
     echo '</ol>' . ($end ? '<p><em>Dự kiến áp dụng đến hết ngày ' . esc_html($end) . '</em></p>' : '') . '</div>';
 }
 /** Ô để lại số điện thoại: nút nổi màu, gửi yêu cầu gọi lại. */
