@@ -87,7 +87,7 @@ form.search input:focus{outline:0}form.search button{width:74px;border:0;backgro
 /* trang trong: khối trắng trên nền xám */
 .page{background:none;border:0;padding:12px 15px 4px;margin:0 auto}.crumb{font-size:12px;color:var(--muted);margin-bottom:14px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}.crumb a{color:var(--brand-dk)}.crumb a:hover{text-decoration:underline}.crumb i{font-style:normal}
 .ph{margin-bottom:18px}.ph h1{font-size:22px;text-transform:uppercase}.ph__c{margin:6px 0 0;color:var(--muted);font-size:13px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chips a{border:1px solid var(--line);color:var(--text);padding:6px 12px;border-radius:0;font-size:13px}.chips a:hover{border-color:var(--brand-dk);color:var(--brand-dk)}
-.lay{display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px;align-items:start}.lay__s h4{font:700 14px var(--display);padding:0 0 8px;text-transform:uppercase}.lay__s{position:sticky;top:20px}
+.lay{display:grid;grid-template-columns:230px minmax(0,1fr);gap:20px;align-items:start}.lay__s h4{font:700 14px var(--display);padding:0 0 8px;text-transform:uppercase}.lay__s{position:static}
 .cats{background:#fff}.cats li a{display:flex;justify-content:space-between;align-items:center;padding:0 4px;min-height:38px;font-size:13px;border-bottom:1px solid var(--line);transition:color .3s linear}
 .cats li a:hover{color:var(--brand-dk)}.cats li a::after{content:"›";color:#aaa;font-size:16px}
 .cats--s li a.on{color:var(--brand-dk);font-weight:700;box-shadow:inset 3px 0 0 var(--brand-dk);padding-left:10px}
@@ -462,3 +462,7 @@ form.search button{background:var(--btn)}
 
 .ph{display:inline-block;white-space:nowrap}
 .promo strong{font-size:20px}
+
+/* sidebar bài viết: nổi theo khi cuộn (desktop) */
+.lay:has(.lay__m--full) .lay__s{position:sticky;top:90px;align-self:start}
+@media(max-width:1024px){.lay:has(.lay__m--full) .lay__s{position:static}}
