@@ -81,13 +81,12 @@ function icd_schema_extra($pr, $p) {
 function icd_promo_box($id) {
     $t = trim((string) get_post_meta($id, '_icd_promo', true)); if (!$t) return;
     $end = get_post_meta($id, '_icd_promo_end', true);
-    $h = trim((string) get_post_meta($id, '_icd_promo_head', true)); $sub = trim((string) get_post_meta($id, '_icd_promo_sub', true));
-    $gift = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 010 5"/></svg>';
-    if ($h) echo '<div class="promo-ban"><span class="promo-ban__k">Ưu đãi đặc biệt</span><b>' . esc_html($h) . '</b>' . ($sub ? '<em>' . esc_html($sub) . '</em>' : '') . '<a href="#bao-gia" class="promo-ban__b">Nhận ngay</a></div>';
-    echo '<div class="promo-box"><h3>' . $gift . ' Khuyến mại đi kèm</h3><ol>';
+    $h = trim((string) get_post_meta($id, '_icd_promo_head', true)) ?: 'Khuyến mại đi kèm'; $sub = trim((string) get_post_meta($id, '_icd_promo_sub', true));
+    $gift = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4"/><path d="M12 8v13M5 12v9h14v-9M7.5 8a2.5 2.5 0 010-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 010 5"/></svg>';
+    echo '<div class="promo-c"><div class="promo-c__h">' . $gift . '<b>' . esc_html($h) . '</b>' . ($sub ? '<span>' . esc_html($sub) . '</span>' : '') . ($end ? '<em>Đến hết ' . esc_html($end) . '</em>' : '') . '</div><ol>';
     foreach (preg_split('/\R/u', $t) as $l) { $l = trim($l); if (!$l) continue; $p = array_map('trim', explode('|', $l, 2));
-        echo '<li><span>' . esc_html($p[0]) . (!empty($p[1]) ? ' <a href="' . esc_url($p[1]) . '">Xem chi tiết</a>' : '') . '</span></li>'; }
-    echo '</ol>' . ($end ? '<p><em>Dự kiến áp dụng đến hết ngày ' . esc_html($end) . '</em></p>' : '') . '</div>';
+        echo '<li>' . esc_html($p[0]) . (!empty($p[1]) ? ' <a href="' . esc_url($p[1]) . '">Xem chi tiết</a>' : '') . '</li>'; }
+    echo '</ol></div>';
 }
 /** Ô để lại số điện thoại: nút nổi màu, gửi yêu cầu gọi lại. */
 function icd_callback($cls = '') {
