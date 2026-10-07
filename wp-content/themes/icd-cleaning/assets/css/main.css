@@ -613,3 +613,13 @@ form.search button{background:var(--btn)}
 @media(max-width:1024px){.promo--c strong{padding-top:0}.promo--c strong::before{display:none}.promo--c strong .ph,.promo--c strong .ph:last-child{display:inline-block;margin-right:.3em}}
 @media(max-width:560px){.promo--c strong .ph,.promo--c strong .ph:last-child{display:block;margin:0}}
 .promo--c strong{font-size:23px}.promo--c .promo__pic{padding-top:22px}.promo--c .promo__pic img{width:100%;max-width:230px}
+/* di động: ☰ logo ... giỏ, điện thoại (hai nút tròn cùng cỡ) */
+@media(max-width:1024px){
+  .hd__cart{order:3;width:44px;height:44px;padding:0;justify-content:center;position:relative;border-color:var(--brand-dk);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .hd__cart span{display:none}
+  .hd__cart svg{width:22px;height:22px}
+  .hd__cart i[data-cart-n]{position:absolute;top:-5px;right:-5px;border:2px solid #fff;min-width:20px;height:20px;line-height:16px;box-sizing:border-box}
+  .hd__tel{order:4}
+}
+@media(max-width:1024px){.hd__in .logo{flex:1 1 0;min-width:0}.hd__in .logo img{max-width:100%;object-fit:contain;object-position:left}.hd__tel{flex:none}.hd__tel i{flex:none}}
+@media(max-width:1024px){.hd__tel{order:3}.hd__cart{order:3}form.search{order:5}}
