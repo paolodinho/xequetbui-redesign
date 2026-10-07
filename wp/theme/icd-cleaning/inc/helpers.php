@@ -101,6 +101,18 @@ function icd_cutout($post_id) {
             foreach ([[1, 0], [-1, 0], [0, 1], [0, -1]] as $d) { $nx = $x + $d[0]; $ny = $y + $d[1];
                 if ($nx >= 0 && $ny >= 0 && $nx < $w && $ny < $h && !$seen[$ny * $w + $nx] && $bg($nx, $ny)) { $seen[$ny * $w + $nx] = 1; $q->enqueue([$nx, $ny]); } }
         }
+        /* bỏ các mảng rời nhỏ (logo hãng, chữ, bóng đổ rời): chỉ giữ mảng lớn nhất và mảng >= 6% mảng lớn nhất */
+        $lab = new SplFixedArray($w * $h); $areas = []; $nl = 0;
+        for ($y0 = 0; $y0 < $h; $y0++) for ($x0 = 0; $x0 < $w; $x0++) {
+            $i0 = $y0 * $w + $x0; if ($lab[$i0] !== null || ((imagecolorat($o, $x0, $y0) >> 24) & 127) >= 100) continue;
+            $nl++; $lab[$i0] = $nl; $st = [$i0]; $ar = 0;
+            while ($st) { $i = array_pop($st); $ar++; $cx = $i % $w; $cy = intdiv($i, $w);
+                foreach ([[1, 0], [-1, 0], [0, 1], [0, -1]] as $d) { $nx = $cx + $d[0]; $ny = $cy + $d[1]; if ($nx < 0 || $ny < 0 || $nx >= $w || $ny >= $h) continue; $ni = $ny * $w + $nx;
+                    if ($lab[$ni] === null && ((imagecolorat($o, $nx, $ny) >> 24) & 127) < 100) { $lab[$ni] = $nl; $st[] = $ni; } } }
+            $areas[$nl] = $ar;
+        }
+        if ($areas) { $mx = max($areas); $clr = imagecolorallocatealpha($o, 255, 255, 255, 127);
+            for ($y0 = 0; $y0 < $h; $y0++) for ($x0 = 0; $x0 < $w; $x0++) { $l = $lab[$y0 * $w + $x0]; if ($l !== null && $areas[$l] < $mx * 0.16) imagesetpixel($o, $x0, $y0, $clr); } }
         $minx = $w; $miny = $h; $maxx = 0; $maxy = 0;
         for ($y = 0; $y < $h; $y++) for ($x = 0; $x < $w; $x++) { if (((imagecolorat($o, $x, $y) >> 24) & 127) < 100) { if ($x < $minx) $minx = $x; if ($x > $maxx) $maxx = $x; if ($y < $miny) $miny = $y; if ($y > $maxy) $maxy = $y; } }
         if ($maxx > $minx && $maxy > $miny) { $c = imagecrop($o, ['x' => $minx, 'y' => $miny, 'width' => $maxx - $minx + 1, 'height' => $maxy - $miny + 1]); if ($c) { imagealphablending($c, false); imagesavealpha($c, true); imagedestroy($o); $o = $c; } }
