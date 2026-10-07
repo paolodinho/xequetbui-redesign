@@ -623,3 +623,10 @@ form.search button{background:var(--btn)}
 }
 @media(max-width:1024px){.hd__in .logo{flex:1 1 0;min-width:0}.hd__in .logo img{max-width:100%;object-fit:contain;object-position:left}.hd__tel{flex:none}.hd__tel i{flex:none}}
 @media(max-width:1024px){.hd__tel{order:3}.hd__cart{order:3}form.search{order:5}}
+/* banner dãy sản phẩm v6: máy to đặt giữa, 3 ý cam kết lấp khoảng trống, đồng đều giữa các banner */
+.promo--c .promo__pic{flex:1 1 auto;min-height:230px;padding:10px 0;align-items:center}
+.promo--c .promo__pic img{width:100%;max-width:none;max-height:300px;object-fit:contain}
+.promo__u{display:grid;gap:7px;margin:4px 2px 14px}
+.promo__u i{position:relative;padding-left:22px;font:500 13px/1.35 var(--body);font-style:normal;color:#E4F7EC}
+.promo__u i::before{content:"";position:absolute;left:0;top:2px;width:14px;height:14px;border-radius:50%;background:#FFD84A url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 7.3l2.2 2.1 4.8-4.8' fill='none' stroke='%230B5C2A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
+@media(max-width:1024px){.promo__u{display:none}}
