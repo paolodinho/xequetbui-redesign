@@ -499,3 +499,8 @@ form.search button{background:var(--btn)}
 .tile__i{display:block;position:relative;overflow:hidden;aspect-ratio:4/3;width:100%}
 .tile__i img{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:contain;object-position:center}
 .tile b{min-height:calc(2*1.4em)}
+/* bảng thông số: bỏ chiều cao/độ rộng cố định từ nội dung cũ, không còn thanh cuộn dọc */
+.prose table{display:table;width:100%!important;max-width:100%;height:auto!important;table-layout:auto}
+.prose table tr,.prose table td,.prose table th{height:auto!important}
+.prose table td,.prose table th{width:auto!important;vertical-align:top;word-break:break-word}
+@media(max-width:760px){.prose table{display:block;overflow-x:auto;overflow-y:hidden}}
