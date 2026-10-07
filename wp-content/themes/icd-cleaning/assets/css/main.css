@@ -600,3 +600,5 @@ form.search button{background:var(--btn)}
 .promo-c li a{color:#C8001A;font-weight:700;white-space:nowrap}
 .pd__i .cb{margin-bottom:10px}
 @media(max-width:700px){.promo-c ol{grid-template-columns:1fr}.promo-c__h span{display:none}}
+/* bỏ vòng sáng nền sau ảnh máy trong banner */
+.promo--c .promo__pic{background:none}
