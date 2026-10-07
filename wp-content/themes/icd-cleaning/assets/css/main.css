@@ -495,3 +495,7 @@ form.search button{background:var(--btn)}
 .bn__pics--g::before{right:40px}
 @media(max-width:1024px){.bn__pics--g{gap:14px 18px;padding:20px 22px 20px 4px}}
 @media(max-width:760px){.bn__pics--g{gap:14px 16px;padding:0 16px 18px}.bn__pics--g a{padding:0 4%!important}}
+/* thẻ danh mục: khung ảnh cố định, ảnh không làm lệch hàng */
+.tile__i{display:block;position:relative;overflow:hidden;aspect-ratio:4/3;width:100%}
+.tile__i img{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:contain;object-position:center}
+.tile b{min-height:calc(2*1.4em)}
