@@ -536,3 +536,36 @@ form.search button{background:var(--btn)}
 .promo-box p{border-top:1px dashed #F2B66B;padding-top:10px;color:#8A4A00}
 .promo-box+.pd__u,.promo-box~.pd__u{margin-top:6px}
 .promo-ban{border-radius:12px 12px 0 0}
+
+/* banner dãy sản phẩm v3: dựng bằng HTML, ảnh máy nằm giữa khung, không phụ thuộc ảnh nền cố định */
+.promo.promo--c{display:flex;flex-direction:column;align-items:stretch;gap:0;padding:22px 18px 16px;min-height:0;border:0;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse 120% 40% at 50% 78%,rgba(255,255,255,.16),transparent 70%),repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 2px,transparent 2px 22px),linear-gradient(170deg,#12A750 0%,#0A8A3F 55%,#066B30 100%)}
+.promo.promo--c::after{display:none}
+.promo--c .promo__t{font:700 12px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:#C9F2D9;border-left:3px solid #FFD84A;padding-left:8px}
+.promo--c strong{display:block;margin:14px 0 0;font:900 clamp(24px,2.2vw,30px)/1.12 var(--display);text-transform:uppercase;letter-spacing:.005em;color:#fff;text-wrap:balance;text-shadow:0 2px 0 rgba(0,60,25,.28)}
+.promo--c strong .ph{display:block}
+.promo--c strong .ph:last-child{color:#FFD84A}
+.promo--c .promo__pic{flex:1;min-height:220px;display:flex;align-items:center;justify-content:center;padding:18px 6% 8px}
+.promo--c .promo__pic img{width:100%;max-height:100%;max-width:210px;object-fit:contain;filter:drop-shadow(0 14px 12px rgba(0,40,15,.4))}
+.promo--c .promo__c{position:static;margin-top:6px;background:#FF8A00;color:#1b1b1b;border-radius:999px;padding:12px 10px;font:800 13px var(--display);box-shadow:0 3px 0 #C25F00;white-space:nowrap}
+.promo--c:hover .promo__c{background:#FFD84A;color:#1b1b1b}
+@media(max-width:1024px){
+  .promo.promo--c{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px 20px;padding:18px 20px}
+  .promo--c .promo__t{grid-column:1/-1}.promo--c .promo__pic{display:none}
+  .promo--c strong{margin:0;font-size:22px}.promo--c strong .ph{display:inline-block;margin-right:.3em}
+  .promo--c .promo__c{margin:0;padding:12px 20px}
+}
+@media(max-width:560px){
+  .promo.promo--c{grid-template-columns:1fr}.promo--c strong .ph{display:block;margin:0}.promo--c .promo__c{text-align:center}
+}
+/* banner dãy sản phẩm v4: áp phích gọn, nhấn cụm cuối bằng nhãn vàng, máy lớn trên vòng sáng */
+.promo.promo--c{padding:16px 14px 14px;background:linear-gradient(175deg,#10A24C 0%,#087A39 60%,#055D2A 100%)}
+.promo--c .promo__t{font-size:11px;letter-spacing:.1em;color:#D7F5E3;border:0;padding:0;opacity:.9}
+.promo--c strong{margin:10px 0 0;font:900 clamp(19px,1.75vw,23px)/1.2 var(--display);text-shadow:none}
+.promo--c strong .ph{display:block;white-space:normal;text-wrap:balance}
+.promo--c strong .ph:last-child{display:inline-block;margin-top:8px;background:#FFD84A;color:#0B5C2A;padding:3px 9px;border-radius:4px;text-shadow:none}
+.promo--c .promo__pic{padding:14px 0 6px;min-height:250px;background:radial-gradient(circle at 50% 55%,rgba(255,255,255,.26) 0 38%,transparent 39%)}
+.promo--c .promo__pic img{max-width:100%;width:92%;filter:drop-shadow(0 12px 10px rgba(0,40,15,.35))}
+.promo--c .promo__c{font-size:12.5px;padding:11px 8px}
+@media(max-width:1024px){.promo--c strong .ph:last-child{margin-top:0;margin-left:.3em}}
+@media(max-width:560px){.promo--c strong .ph:last-child{margin:6px 0 0}}

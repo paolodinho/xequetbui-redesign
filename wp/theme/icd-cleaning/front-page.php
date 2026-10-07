@@ -47,7 +47,7 @@ if ($hid) : ?>
 <section class="box" id="row-<?php echo (int) $n; ?>">
   <div class="box__h"><h2><?php echo esc_html($title); ?></h2><a class="more" href="<?php echo esc_url($more); ?>">Xem thêm</a></div>
   <div class="box__b">
-    <a class="promo<?php echo trim($bimg) ? ' promo--img' : ''; echo !empty($short) ? ' promo--s' : ''; ?>" href="#bao-gia"<?php echo trim($bimg) ? ' style="--pimg:url(\'' . esc_url(trim($bimg)) . '\')"' : ''; ?>><strong><?php echo icd_chunks($bh); ?></strong><span class="promo__d"><?php echo esc_html((trim($kick) && trim($kick) !== 'ICD Cleaning') ? trim($kick) : icd('hero_text')); ?></span><span class="promo__c">Nhận báo giá: <?php echo esc_html(icd('hotline')); ?></span></a>
+    <a class="promo promo--c" href="#bao-gia"><span class="promo__t"><?php echo esc_html($title); ?></span><strong><?php echo icd_chunks($bh); ?></strong><span class="promo__pic"><img loading="lazy" src="<?php echo esc_url(icd_cutout($ps[0]->ID)); ?>" alt="<?php echo esc_attr(get_the_title($ps[0])); ?>"></span><span class="promo__c">Nhận báo giá: <?php echo esc_html(icd('hotline')); ?></span></a>
     <div class="grid grid--5"><?php foreach ($ps as $p) icd_card($p); ?></div>
   </div>
 </section>
