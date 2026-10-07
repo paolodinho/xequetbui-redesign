@@ -507,3 +507,13 @@ form.search button{background:var(--btn)}
 /* bài nổi bật không có ảnh: tiêu đề chiếm full ngang, không bị dồn vào cột 72px */
 .side-posts a:not(:has(img)),.side-prods a:not(:has(img)){grid-template-columns:1fr}
 .side-posts a>span{min-width:0}
+/* khuyến mại: banner + hộp đi kèm */
+.promo-ban{margin:16px 0 0;padding:14px 18px;text-align:center;border-radius:12px;background:#FFF3C4;border:3px solid #F6A609;outline:2px dotted #fff;outline-offset:-8px;position:relative}
+.promo-ban__k{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#D6001C;color:#fff;font:700 12px var(--display);text-transform:uppercase;padding:3px 14px;border-radius:4px;white-space:nowrap}
+.promo-ban b{display:block;font:800 clamp(24px,3.2vw,36px)/1.15 var(--display);color:#D6001C;text-transform:uppercase;margin-top:6px}
+.promo-ban em{display:block;font:600 15px var(--body);font-style:normal;color:#7A4B00;margin-top:4px}
+.promo-ban__b{display:inline-block;margin-top:10px;background:#D6001C;color:#fff;font:700 13px var(--display);text-transform:uppercase;padding:4px 18px;border-radius:14px;text-decoration:none}
+.promo-ban+.promo-box{margin-top:14px}
+.promo-box h3{display:flex;align-items:center;gap:8px}.promo-box h3 svg{color:#E8590C;flex:none}
+.promo-box li a{color:#2F7FD9;text-decoration:none;margin-left:4px}.promo-box li a:hover{text-decoration:underline}
+.promo-box li>span{padding-top:2px}
