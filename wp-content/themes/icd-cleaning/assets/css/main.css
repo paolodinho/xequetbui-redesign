@@ -504,3 +504,6 @@ form.search button{background:var(--btn)}
 .prose table tr,.prose table td,.prose table th{height:auto!important}
 .prose table td,.prose table th{width:auto!important;vertical-align:top;word-break:break-word}
 @media(max-width:760px){.prose table{display:block;overflow-x:auto;overflow-y:hidden}}
+/* bài nổi bật không có ảnh: tiêu đề chiếm full ngang, không bị dồn vào cột 72px */
+.side-posts a:not(:has(img)),.side-prods a:not(:has(img)){grid-template-columns:1fr}
+.side-posts a>span{min-width:0}
