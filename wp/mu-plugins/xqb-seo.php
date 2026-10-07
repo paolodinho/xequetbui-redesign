@@ -51,6 +51,7 @@ add_action('wp_head', function () {
     if (is_singular('product')) {
         $p = get_queried_object(); $pr = ['@type' => 'Product', 'name' => get_the_title($p), 'url' => get_permalink($p), 'description' => $desc, 'brand' => ['@type' => 'Brand', 'name' => 'ICD Cleaning Machines'], 'sku' => (string) $p->ID];
         if ($img) $pr['image'] = $img;
+        if (function_exists('icd_schema_extra')) $pr = icd_schema_extra($pr, $p);
         $g[] = $pr;
     } elseif (is_singular('post')) {
         $p = get_queried_object(); $ar = ['@type' => 'Article', 'headline' => get_the_title($p), 'datePublished' => get_the_date('c', $p), 'dateModified' => get_the_modified_date('c', $p), 'mainEntityOfPage' => get_permalink($p), 'author' => ['@type' => 'Organization', 'name' => 'ICD Green Tech'], 'publisher' => $org];

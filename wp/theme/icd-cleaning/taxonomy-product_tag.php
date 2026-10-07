@@ -5,7 +5,7 @@
   <div class="lay__m">
     <header class="ph"><h1><?php echo esc_html($q->name); ?></h1><p class="ph__c"><?php echo (int) $wp_query->found_posts; ?> sản phẩm - giá liên hệ báo giá</p>
       <?php if ($subs) : ?><div class="chips"><?php foreach ($subs as $s) echo '<a href="' . esc_url(get_term_link($s)) . '">' . esc_html($s->name) . '</a>'; ?></div><?php endif; ?></header>
-    <?php if (have_posts()) : ?><div class="grid grid--4 grid--box"><?php while (have_posts()) { the_post(); icd_card(); } ?></div>
+    <?php icd_sortbar(); if (have_posts()) : ?><div class="grid grid--4 grid--box"><?php while (have_posts()) { the_post(); icd_card(); } ?></div>
       <?php the_posts_pagination(['mid_size' => 1, 'prev_text' => '‹', 'next_text' => '›']); ?>
     <?php else : ?><p>Chưa có sản phẩm trong danh mục này.</p><?php endif; ?>
     <?php if ($q->description && !is_paged()) : ?><div class="prose prose--box"><?php echo wp_kses_post(wpautop($q->description)); ?></div><?php endif; ?>

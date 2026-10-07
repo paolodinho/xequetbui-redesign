@@ -99,6 +99,7 @@ function xqb_handle_quote() {
     if (!isset($_POST['_xqb']) || !wp_verify_nonce($_POST['_xqb'], 'xqb_quote') || !empty($_POST['website'])) { wp_safe_redirect(add_query_arg('bg', 'err', $back)); exit; }
     $name = sanitize_text_field($_POST['name'] ?? ''); $phone = preg_replace('/[^0-9+ .]/', '', $_POST['phone'] ?? '');
     $sp = sanitize_text_field($_POST['sp'] ?? ''); $note = sanitize_textarea_field($_POST['note'] ?? '');
+    if ($name === '' && !empty($_POST['cb'])) $name = 'Khách để lại SĐT';
     if (strlen(preg_replace('/\D/', '', $phone)) < 9 || $name === '') { wp_safe_redirect(add_query_arg('bg', 'err', $back) . '#bao-gia'); exit; }
     $body = "Họ tên: $name\nĐiện thoại: $phone\nSản phẩm: $sp\nNhu cầu: $note\nTrang gửi: $back";
     wp_insert_post(['post_type' => 'bao_gia', 'post_status' => 'publish', 'post_title' => "$name - $phone" . ($sp ? " - $sp" : ''), 'post_content' => $body]);

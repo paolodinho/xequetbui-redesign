@@ -18,6 +18,10 @@ function icd_ico($n) {
         'bell' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg>',
         'phone_l' => '<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.3.2 2.5.57 3.6a1 1 0 0 1-.25 1z"/></svg>',
         'msg' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.1 2 11.3c0 2.9 1.4 5.5 3.7 7.2V22l3.4-1.9c.9.2 1.9.4 2.9.4 5.5 0 10-4.1 10-9.2S17.5 2 12 2zm1 12.4-2.5-2.7-4.9 2.7 5.4-5.7 2.6 2.7 4.8-2.7z"/></svg>',
+        'cart' => '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/><path d="M2 3h3l2.6 12.5a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 8H6"/></svg>',
+        'fb' => '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.9.4-1.7 1.8-1.7h1.6V3.8S15.6 3.5 14.2 3.5c-3 0-4.6 1.8-4.6 4.8v2.2H6.8v3.3h2.8V22z"/></svg>',
+        'yt' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg>',
+        'up' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 14 7-7 7 7"/><path d="M5 20h14"/></svg>',
         'ok' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
         'truck' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
         'tool' => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.4-.6-.6-2.4z"/></svg>',
@@ -35,9 +39,10 @@ function icd_card($post = null) {
     $post = get_post($post); $id = $post->ID; $t = get_the_title($id); $u = get_permalink($id); $img = icd_img($id);
     ?>
     <article class="card">
-      <a class="card__img" href="<?php echo esc_url($u); ?>" aria-label="<?php echo esc_attr($t); ?>"><?php if ($img) : ?><img loading="lazy" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($t); ?>"><?php endif; ?></a>
+      <a class="card__img" href="<?php echo esc_url($u); ?>" aria-label="<?php echo esc_attr($t); ?>"><?php if ($img) : ?><img loading="lazy" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($t); ?>"><?php endif; echo icd_badges($id); ?></a>
       <h3 class="card__t"><a href="<?php echo esc_url($u); ?>"><?php echo icd_nb($t); ?></a></h3>
-      <p class="card__p"><a href="#bao-gia" data-sp="<?php echo esc_attr($t); ?>">Liên hệ báo giá</a></p>
+      <div class="card__p"><?php echo icd_price_html($id); ?></div>
+      <button class="card__q" type="button" data-addq="<?php echo (int) $id; ?>" data-t="<?php echo esc_attr($t); ?>"><?php echo icd_ico('cart'); ?> Thêm vào giỏ</button>
     </article>
     <?php
 }
@@ -96,6 +101,9 @@ function icd_cutout($post_id) {
             foreach ([[1, 0], [-1, 0], [0, 1], [0, -1]] as $d) { $nx = $x + $d[0]; $ny = $y + $d[1];
                 if ($nx >= 0 && $ny >= 0 && $nx < $w && $ny < $h && !$seen[$ny * $w + $nx] && $bg($nx, $ny)) { $seen[$ny * $w + $nx] = 1; $q->enqueue([$nx, $ny]); } }
         }
+        $minx = $w; $miny = $h; $maxx = 0; $maxy = 0;
+        for ($y = 0; $y < $h; $y++) for ($x = 0; $x < $w; $x++) { if (((imagecolorat($o, $x, $y) >> 24) & 127) < 100) { if ($x < $minx) $minx = $x; if ($x > $maxx) $maxx = $x; if ($y < $miny) $miny = $y; if ($y > $maxy) $maxy = $y; } }
+        if ($maxx > $minx && $maxy > $miny) { $c = imagecrop($o, ['x' => $minx, 'y' => $miny, 'width' => $maxx - $minx + 1, 'height' => $maxy - $miny + 1]); if ($c) { imagealphablending($c, false); imagesavealpha($c, true); imagedestroy($o); $o = $c; } }
         wp_mkdir_p($dir); imagepng($o, $file, 6); imagedestroy($o);
     }
     return $up['baseurl'] . '/icd-cutout/' . $tid . '.png';
@@ -103,7 +111,7 @@ function icd_cutout($post_id) {
 
 /** Khối gợi ý đọc tiếp (bài tư vấn) - giữ người xem ở lại site. */
 function icd_related_posts($title = 'Tư vấn chọn máy', $exclude = 0, $n = 3) {
-    $ps = get_posts(['numberposts' => $n, 'post__not_in' => $exclude ? [$exclude] : [], 'category_name' => 'tu-van']);
+    $ps = get_posts(icd_knowledge_args($n, ['post__not_in' => $exclude ? [$exclude] : []]));
     if (count($ps) < $n) $ps = get_posts(['numberposts' => $n, 'post__not_in' => $exclude ? [$exclude] : []]);
     if (!$ps) return;
     echo '<section class="box"><div class="box__h"><h2>' . esc_html($title) . '</h2><a class="more" href="' . esc_url(home_url('/tu-van.html')) . '">Xem thêm</a></div><div class="rd">';
@@ -124,3 +132,34 @@ function icd_pretty_content($h) {
     return $h;
 }
 add_filter('the_content', function ($c) { return (is_singular('product') || is_singular('post')) ? icd_pretty_content($c) : $c; }, 9);
+
+function icd_cat_kids($id) {
+    return get_terms(['taxonomy' => 'product_cat', 'parent' => $id, 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC']);
+}
+/** Mục danh mục cho menu: có danh mục con thì kèm bảng con bay ra bên phải. */
+function icd_cat_li($t) {
+    $k = icd_cat_kids($t->term_id);
+    $o = '<li class="' . ($k ? 'has-kids' : '') . '"><a href="' . esc_url(get_term_link($t)) . '"><span>' . esc_html($t->name) . '</span>' . ($k ? '<i aria-hidden="true">›</i>' : '') . '</a>';
+    if ($k) {
+        $o .= '<ul class="cat-sub">';
+        foreach ($k as $c) $o .= '<li><a href="' . esc_url(get_term_link($c)) . '"><span>' . esc_html($c->name) . '</span><em>' . (int) $c->count . '</em></a></li>';
+        $o .= '</ul>';
+    }
+    return $o . '</li>';
+}
+
+/** Danh sách danh mục cho panel/menu: 2 mục đầu là Bán chạy + Khuyến mại, sau đó là các danh mục sản phẩm. */
+function icd_cats_menu() {
+    $o = '<li class="sp-hot"><a href="' . esc_url(home_url('/san-pham-ban-chay.html')) . '"><span>Sản phẩm bán chạy</span></a></li>';
+    if (icd_sale_ids()) $o .= '<li class="sp-hot sp-sale"><a href="' . esc_url(home_url('/san-pham-khuyen-mai.html')) . '"><span>Khuyến mại trong tháng</span></a></li>';
+    foreach (icd_top_cats() as $t) $o .= icd_cat_li($t);
+    return $o;
+}
+
+/** Tiêu đề ngắt dòng theo cụm: các cụm cách nhau bằng " / ", mỗi cụm không bị cắt giữa chừng. Không có "/" thì dùng icd_nb. */
+function icd_chunks($t) {
+    if (strpos($t, '/') === false) return icd_nb($t);
+    $o = '';
+    foreach (array_filter(array_map('trim', explode('/', $t))) as $c) $o .= '<span class="ph">' . esc_html($c) . '</span> ';
+    return trim($o);
+}
