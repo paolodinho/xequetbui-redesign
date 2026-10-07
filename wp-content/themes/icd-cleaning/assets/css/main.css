@@ -459,3 +459,6 @@ form.search button{background:var(--btn)}
   .promo strong{font-size:18px}
   .promo__c{justify-self:stretch;text-align:center}
 }
+
+.ph{display:inline-block;white-space:nowrap}
+.promo strong{font-size:20px}
