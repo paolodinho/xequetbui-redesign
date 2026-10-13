@@ -137,7 +137,7 @@ function icd_sortbar() {
     $base = preg_replace('#/page/\d+/?#', '/', $base);
     echo '<div class="sortbar"><span>Sắp xếp:</span>';
     foreach (['' => 'Mới nhất', 'ban-chay' => 'Bán chạy nhất', 'gia-tang' => 'Giá từ thấp đến cao', 'gia-giam' => 'Giá từ cao đến thấp'] as $k => $l)
-        echo '<a class="' . ($cur === $k ? 'on' : '') . '" href="' . esc_url($k ? add_query_arg('sx', $k, $base) : $base) . '">' . esc_html($l) . '</a>';
+        echo '<a class="' . ($cur === $k ? 'on' : '') . '" data-sx="' . esc_attr($k ?: 'moi') . '" href="' . esc_url($k ? add_query_arg('sx', $k, $base) : $base) . '">' . esc_html($l) . '</a>';
     echo '</div>';
 }
 // danh sách rỗng (chưa có SP hot/khuyến mại) vẫn là trang 200, không phải 404

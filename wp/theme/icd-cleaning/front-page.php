@@ -58,7 +58,7 @@ if ($hid) : ?>
   <div class="box__h"><h2>Kiến thức và tư vấn chọn máy</h2><a class="more" href="<?php echo esc_url(home_url('/tu-van.html')); ?>">Xem thêm</a></div>
   <div class="news">
     <a class="news__f" href="<?php echo esc_url(get_permalink($f)); ?>"><?php $im = icd_img($f->ID, 'medium_large'); if ($im) echo '<img loading="lazy" src="' . esc_url($im) . '" alt="">'; ?><strong><?php echo esc_html(get_the_title($f)); ?></strong><time>Ngày cập nhật: <?php echo esc_html(get_the_date('d/m/Y', $f)); ?></time><p><?php echo esc_html(wp_trim_words(get_the_excerpt($f) ?: wp_strip_all_tags($f->post_content), 36, '…')); ?></p></a>
-    <ul class="news__l"><?php foreach ($ns as $p) : ?><li><a href="<?php echo esc_url(get_permalink($p)); ?>"><?php $im = icd_img($p->ID, 'medium'); if ($im) echo '<img loading="lazy" src="' . esc_url($im) . '" alt="">'; ?><span><strong><?php echo esc_html(get_the_title($p)); ?></strong><time>Ngày cập nhật: <?php echo esc_html(get_the_date('d/m/Y', $p)); ?></time></span></a></li><?php endforeach; ?></ul>
+    <ul class="news__l"><?php foreach ($ns as $p) : ?><li><a href="<?php echo esc_url(get_permalink($p)); ?>"><?php $im = icd_img($p->ID, 'medium'); if ($im) echo '<img loading="lazy" src="' . esc_url($im) . '" alt="">'; ?><span><strong><?php echo esc_html(get_the_title($p)); ?></strong><time>Ngày cập nhật: <?php echo esc_html(get_the_date('d/m/Y', $p)); ?></time><em class="news__x"><?php echo esc_html(wp_trim_words(get_the_excerpt($p) ?: wp_strip_all_tags($p->post_content), 20, '…')); ?></em></span></a></li><?php endforeach; ?></ul>
   </div>
 </section>
 <?php endif; ?>

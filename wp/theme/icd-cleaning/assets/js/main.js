@@ -88,3 +88,24 @@
     if (slot) slot.replaceWith(box); else pr.insertBefore(box, pr.children[1] || null);
   });
 })();
+/* Sắp xếp sản phẩm ngay trên trang, không tải lại (chạy cả bản demo tĩnh) */
+(function(){
+  document.querySelectorAll('.sortbar').forEach(function(bar){
+    var grid=bar.parentNode.querySelector('.grid--box'); if(!grid) return;
+    var cards=[].slice.call(grid.querySelectorAll('.card')); cards.forEach(function(c,i){c.dataset.i=i;});
+    var num=function(c,k){return parseFloat(c.dataset[k])||0;};
+    bar.addEventListener('click',function(e){
+      var a=e.target.closest('a[data-sx]'); if(!a) return; e.preventDefault();
+      var k=a.dataset.sx, list=cards.slice();
+      list.sort(function(x,y){
+        if(k==='moi') return num(y,'d')-num(x,'d')||num(x,'i')-num(y,'i');
+        if(k==='ban-chay') return num(y,'ts')-num(x,'ts')||num(x,'i')-num(y,'i');
+        var px=num(x,'pr'),py=num(y,'pr'); if(!px&&!py) return num(x,'i')-num(y,'i'); if(!px) return 1; if(!py) return -1;
+        return k==='gia-tang'?px-py:py-px;
+      });
+      list.forEach(function(c){grid.appendChild(c);});
+      bar.querySelectorAll('a').forEach(function(x){x.classList.toggle('on',x===a);});
+      try{history.replaceState(null,'',a.getAttribute('href'));}catch(_){}
+    });
+  });
+})();

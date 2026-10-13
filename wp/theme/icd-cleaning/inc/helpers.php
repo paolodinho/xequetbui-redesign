@@ -11,6 +11,8 @@ function icd_img($id, $size = 'woocommerce_single') {
 function icd_ico($n) {
     $i = [
         'search' => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+        'headset' => '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><path d="M21 15a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"/><path d="M3 15a2 2 0 0 0 2 2h1v-6H5a2 2 0 0 0-2 2z"/><path d="M18 17v1a3 3 0 0 1-3 3h-3"/></svg>',
+        'mail' => '<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/><path d="M8 2.5 9 4M12 1.5V4M16 2.5 15 4"/></svg>',
         'phone' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>',
         'pin' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>',
         'menu' => '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>',
@@ -38,7 +40,7 @@ function icd_nb($t) {
 function icd_card($post = null) {
     $post = get_post($post); $id = $post->ID; $t = get_the_title($id); $u = get_permalink($id); $img = icd_img($id);
     ?>
-    <article class="card">
+    <article class="card" data-d="<?php echo (int) get_post_time('U', true, $id); ?>" data-pr="<?php echo esc_attr((float) get_post_meta($id, '_price', true)); ?>" data-ts="<?php echo (int) get_post_meta($id, 'total_sales', true) + (has_term('featured', 'product_visibility', $id) ? 100000 : 0); ?>">
       <a class="card__img" href="<?php echo esc_url($u); ?>" aria-label="<?php echo esc_attr($t); ?>"><?php if ($img) : ?><img loading="lazy" src="<?php echo esc_url($img); ?>" alt="<?php echo esc_attr($t); ?>"><?php endif; echo icd_badges($id); ?></a>
       <h3 class="card__t"><a href="<?php echo esc_url($u); ?>"><?php echo icd_nb($t); ?></a></h3>
       <div class="card__p"><?php echo icd_price_html($id); ?></div>
@@ -174,4 +176,10 @@ function icd_chunks($t) {
     $o = '';
     foreach (array_filter(array_map('trim', explode('/', $t))) as $c) $o .= '<span class="ph">' . esc_html($c) . '</span> ';
     return trim($o);
+}
+
+/** Trang chính sách hỗ trợ khách hàng (footer, yêu cầu của Google Merchant Center). Slug => tên hiển thị. */
+function icd_policy_pages() {
+    return ['chinh-sach-bao-mat' => 'Bảo mật thông tin', 'chinh-sach-bao-hanh' => 'Chính sách bảo hành', 'chinh-sach-hau-mai' => 'Chính sách hậu mãi', 'chinh-sach-kiem-hang' => 'Chính sách kiểm hàng',
+        'chinh-sach-van-chuyen' => 'Chính sách vận chuyển', 'xu-ly-khieu-nai' => 'Xử lý khiếu nại', 'hinh-thuc-thanh-toan' => 'Hình thức thanh toán', 'kiem-tra-don-hang' => 'Kiểm tra đơn hàng'];
 }

@@ -630,3 +630,49 @@ form.search button{background:var(--btn)}
 .promo__u i{position:relative;padding-left:22px;font:500 13px/1.35 var(--body);font-style:normal;color:#E4F7EC}
 .promo__u i::before{content:"";position:absolute;left:0;top:2px;width:14px;height:14px;border-radius:50%;background:#FFD84A url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3.5 7.3l2.2 2.1 4.8-4.8' fill='none' stroke='%230B5C2A' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat}
 @media(max-width:1024px){.promo__u{display:none}}
+
+/* === Góp ý 12/10 === */
+/* Tông màu: bớt cam nâu "nhờ nhờ" - giá/hotline đỏ tươi, tiêu đề tin và trạng thái hover theo xanh thương hiệu */
+:root{--orange-dk:#D0021B}
+.news__f strong{color:var(--brand-dk)}
+.nav ul.nav__mega li a:hover,.bn__cats li a:hover,.has-kids:hover>a,.cat-sub li a:hover,.lay__s .cats li a:hover,.lay__s .cats .cats__kids li a:hover{background:var(--brand-dk)!important;color:#fff!important}
+a:hover,.nav .menu a:hover,.nav .menu .current-menu-item a:hover,.hd__top a:hover,.crumb a:hover,.card a:hover,.card__t:hover,.ft a:hover,.pd a:hover,.prose a:hover{color:var(--brand-dk)}
+.ft__hot a:not(.btn){color:var(--orange-dk)}
+/* Menu ngang chữ to hơn */
+.nav .menu a{font-size:15.5px;padding:0 18px}
+/* Hero: khung ảnh cao theo đúng cột danh mục, không để danh mục thò xuống dưới */
+.bn__g{height:auto;min-height:470px;align-items:stretch}
+.bn__img{min-height:470px}
+/* Nhãn Khuyến mại sang góc phải ảnh (tránh che logo hãng), nhấp nháy */
+.tags{left:auto;right:6px;align-items:flex-end}
+.tag--sale{animation:tagblink 1.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.tag--sale{animation:none}}
+/* Hàng có banner: nút Thêm vào giỏ nằm ngay dưới giá, không bị đẩy xuống đáy */
+.box__b .card__q{margin-top:6px}
+.box__b .grid{align-items:start}
+/* Khối Kiến thức: mô tả ngắn ở tin bên phải */
+.news__x{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin-top:6px;font:400 13px/1.5 var(--body);color:var(--text);font-style:normal}
+.news__l time{display:block}
+/* Dải hỗ trợ cuối trang: icon + khung, ô để lại số điện thoại */
+.ft__s{gap:20px}
+.ft__s .ft__hot{align-items:center;gap:22px;padding:22px 24px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.ft__ico{flex:none;display:grid;place-items:center;width:64px;height:64px;padding-right:22px;border-right:1px solid var(--line);color:var(--brand-dk);box-sizing:content-box}
+.ft__hot--cb>div{flex:1;min-width:0}
+.cb--ft{margin:10px 0 0;padding:0;background:none;border:0;gap:8px}
+.cb--ft .cb__t{display:none}
+.cb--ft input[name=phone]{height:42px;border:1px solid var(--line);box-shadow:none}
+.cb--ft .btn--hot{min-height:42px;padding:0 20px}
+@media(max-width:760px){.ft__ico{width:44px;height:44px;padding-right:14px}.ft__ico svg{width:34px;height:34px}.ft__s .ft__hot{padding:16px;gap:14px}}
+/* Nút gọi và Zalo nổi bật ở trang sản phẩm */
+.pd__hot{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+.hotbtn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:6px 22px 6px 6px;border-radius:999px;font:800 16px/1.1 var(--display);color:#fff;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.14);transition:transform .15s,filter .15s}
+.hotbtn:hover{color:#fff!important;transform:translateY(-1px);filter:brightness(1.06)}
+.hotbtn i{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#fff;font:800 11px var(--display);font-style:normal;flex:none}
+.hotbtn--call{background:linear-gradient(180deg,#F0322F,#C8102E)}.hotbtn--call i{color:#C8102E;animation:cfring 1.6s ease-in-out infinite}
+.hotbtn--call b{font-size:19px;letter-spacing:.01em}
+.hotbtn--zalo{background:linear-gradient(180deg,#FF8A1F,#F26B00);text-transform:uppercase;font-size:14.5px}.hotbtn--zalo i{color:#0068FF}
+@media (prefers-reduced-motion:reduce){.hotbtn--call i{animation:none}}
+@media(max-width:560px){.hotbtn{width:100%;justify-content:flex-start}}
+/* Bảng thông số dựng lại trong mô tả danh mục */
+.prose table.spec th{background:var(--green-050);font-weight:700;color:var(--ink)}
+.prose table.spec tr:nth-child(even) td{background:#FAFBFA}
