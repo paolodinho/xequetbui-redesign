@@ -30,3 +30,7 @@ require_once get_theme_file_path('inc/shop.php');
 add_filter('the_content', function ($c) {
     return preg_replace(['#(<iframe[^>]+src=["\'])(?:https?:)?//(www\.)?youtube(-nocookie)?\.com#i', '#<iframe(?![^>]*loading=)#i'], ['$1https://www.youtube$3.com', '<iframe loading="lazy"'], $c);
 }, 20);
+
+// Không dùng gạch dài (rule chung): đổi "—", "–" thành "-" trong toàn bộ HTML trang (tiêu đề, trích đoạn, alt, meta)
+function icd_no_dash($s) { return is_string($s) ? str_replace(['—', '–', '&#8212;', '&#8211;', '&mdash;', '&ndash;'], '-', $s) : $s; }
+add_action('template_redirect', function () { if (!is_admin() && !wp_doing_ajax() && !is_feed()) ob_start('icd_no_dash'); }, 0);
