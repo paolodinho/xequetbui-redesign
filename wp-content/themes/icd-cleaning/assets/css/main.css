@@ -676,3 +676,10 @@ a:hover,.nav .menu a:hover,.nav .menu .current-menu-item a:hover,.hd__top a:hove
 /* Bảng thông số dựng lại trong mô tả danh mục */
 .prose table.spec th{background:var(--green-050);font-weight:700;color:var(--ink)}
 .prose table.spec tr:nth-child(even) td{background:#FAFBFA}
+/* === 16/10: ảnh đại diện cùng tỉ lệ 16:10 trên mọi web ICD (khách chốt 15/10) === */
+.card__img,.tile__i{aspect-ratio:16/10}
+.news__f img{aspect-ratio:16/10;object-position:center}
+.news__l img{width:120px;height:75px;object-position:center}
+.pc img,.posts--1 .pc img,.pc__ph{width:240px;height:150px;object-position:center}
+.side-posts img{width:72px;height:45px}
+@media(max-width:760px){.pc img,.posts--1 .pc img,.pc__ph{width:100%;height:auto;aspect-ratio:16/10}}
