@@ -150,10 +150,29 @@ add_filter('the_content', function ($c) { return (is_singular('product') || is_s
 function icd_cat_kids($id) {
     return get_terms(['taxonomy' => 'product_cat', 'parent' => $id, 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC']);
 }
+/** Icon nét cho mục menu danh mục, chọn theo slug (khách 31/10: menu có màu + icon như thietbirik.com). */
+function icd_cat_icon($slug) {
+    $p = [
+        'ban-chay'  => '<path d="M12 3c1 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-1.5.6-2.6 1.5-3.5.2 1.5 1 2.3 2 2.5C11 8.5 11 5.5 12 3z"/><path d="M6.5 14a5.5 5.5 0 0 0 11 0"/>',
+        'khuyen-mai'=> '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>',
+        'cha-san'   => '<path d="M7 3h4l1 9H6z"/><path d="M5 12h10v4H5z"/><path d="M3 19h14"/><circle cx="6" cy="19" r="1"/><circle cx="14" cy="19" r="1"/><path d="M15 14h4l1 5"/>',
+        'hoa-chat'  => '<path d="M9 3h5v3H9zM10 6h3"/><path d="M8 9h7l1 3v9H7v-9z"/><path d="M14 4h3l2 2M10 15h3"/>',
+        'hut-bui'   => '<path d="M6 8a4 4 0 0 1 8 0v9H6z"/><path d="M14 10h2a3 3 0 0 1 3 3v2"/><path d="M17 15h4v3h-4z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="12.5" cy="19" r="1.5"/>',
+        'xe-nang'   => '<path d="M3 18V9h6l3 5v4H3z"/><path d="M16 3v15h5"/><circle cx="6" cy="18.5" r="1.8"/><circle cx="11" cy="18.5" r="1.8"/>',
+        'phun-xit'  => '<path d="M4 8h9v4H8l-1 6H4z"/><path d="M13 9h4M17 7v4"/><path d="M19.5 7.5l1.5-1M20 9h1.5M19.5 10.5l1.5 1"/>',
+        'phu-tung'  => '<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>',
+        'cho-rac'   => '<path d="M2 7h11v10H2z"/><path d="M13 10h4l3.5 3.5V17H13"/><circle cx="6" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M5 10v4M8 10v4"/>',
+        'quet-rac'  => '<path d="M5 15V8h8l3 4h4v3z"/><path d="M8 8V5h4"/><circle cx="8" cy="17" r="1.8"/><circle cx="16" cy="17" r="1.8"/><path d="M3 20c1-1 2-1.5 4-1.5M2 18h2"/>',
+        'khac'      => '<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>',
+    ];
+    $key = 'khac';
+    foreach (['ban-chay' => 'ban-chay', 'khuyen-mai' => 'khuyen-mai', 'cha-san' => 'cha-san', 'hoa-chat' => 'hoa-chat', 'hut-bui' => 'hut-bui', 'xe-nang' => 'xe-nang', 'keo-hang' => 'xe-nang', 'phun-xit' => 'phun-xit', 'ap-luc' => 'phun-xit', 'phu-tung' => 'phu-tung', 'phu-kien' => 'phu-tung', 'cho-rac' => 'cho-rac', 'quet-rac' => 'quet-rac', 'quet-bui' => 'quet-rac'] as $k => $v) if (strpos($slug, $k) !== false) { $key = $v; break; }
+    return '<b class="cat-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' . $p[$key] . '</svg></b>';
+}
 /** Mục danh mục cho menu: có danh mục con thì kèm bảng con bay ra bên phải. */
 function icd_cat_li($t) {
     $k = icd_cat_kids($t->term_id);
-    $o = '<li class="' . ($k ? 'has-kids' : '') . '"><a href="' . esc_url(get_term_link($t)) . '"><span>' . esc_html($t->name) . '</span>' . ($k ? '<i aria-hidden="true">›</i>' : '') . '</a>';
+    $o = '<li class="' . ($k ? 'has-kids' : '') . '"><a href="' . esc_url(get_term_link($t)) . '">' . icd_cat_icon($t->slug) . '<span>' . esc_html($t->name) . '</span>' . ($k ? '<i aria-hidden="true">›</i>' : '') . '</a>';
     if ($k) {
         $o .= '<ul class="cat-sub">';
         foreach ($k as $c) $o .= '<li><a href="' . esc_url(get_term_link($c)) . '"><span>' . esc_html($c->name) . '</span><em>' . (int) $c->count . '</em></a></li>';
@@ -164,8 +183,8 @@ function icd_cat_li($t) {
 
 /** Danh sách danh mục cho panel/menu: 2 mục đầu là Bán chạy + Khuyến mại, sau đó là các danh mục sản phẩm. */
 function icd_cats_menu() {
-    $o = '<li class="sp-hot"><a href="' . esc_url(home_url('/san-pham-ban-chay.html')) . '"><span>Sản phẩm bán chạy</span></a></li>';
-    if (icd_sale_ids()) $o .= '<li class="sp-hot sp-sale"><a href="' . esc_url(home_url('/san-pham-khuyen-mai.html')) . '"><span>Khuyến mại trong tháng</span></a></li>';
+    $o = '<li class="sp-hot"><a href="' . esc_url(home_url('/san-pham-ban-chay.html')) . '">' . icd_cat_icon('ban-chay') . '<span>Sản phẩm bán chạy</span></a></li>';
+    if (icd_sale_ids()) $o .= '<li class="sp-hot sp-sale"><a href="' . esc_url(home_url('/san-pham-khuyen-mai.html')) . '">' . icd_cat_icon('khuyen-mai') . '<span>Khuyến mại trong tháng</span></a></li>';
     foreach (icd_top_cats() as $t) $o .= icd_cat_li($t);
     return $o;
 }
