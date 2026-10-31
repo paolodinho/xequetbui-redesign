@@ -55,7 +55,11 @@ function icd_products_by_cats($slugs, $n) {
 }
 function icd_top_cats() {
     $ts = get_terms(['taxonomy' => 'product_cat', 'parent' => 0, 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC']);
-    return array_values(array_filter($ts, fn($t) => $t->slug !== 'chua-phan-loai'));
+    $ts = array_values(array_filter($ts, fn($t) => $t->slug !== 'chua-phan-loai'));
+    // Khách 31/10: Xe quét rác, Xe chở rác đứng ngay dưới Máy chà sàn
+    $pri = ['may-lau-san-cha-san-nha-xuong-cong-nghiep' => 0, 'xe-quet-rac' => 1, 'xe-cho-rac' => 2];
+    usort($ts, fn($a, $b) => ($pri[$a->slug] ?? 9) <=> ($pri[$b->slug] ?? 9) ?: $b->count <=> $a->count);
+    return $ts;
 }
 function icd_breadcrumb() {
     $b = ['<a href="' . esc_url(home_url('/')) . '">Trang chủ</a>'];

@@ -71,8 +71,12 @@ while True:
         if 'noindex' not in h: h = h.replace('<head>', '<head>\n<meta name="robots" content="noindex, nofollow">', 1)
         wr('%s-page-%s.html' % (slug, n), h)
         for m in re.finditer(r'wp-content/uploads/[^"\'\s,)<>]+\.(?:jpe?g|png|webp|gif|svg)', h): need.add(urllib.parse.unquote(m.group(0)))
+# form gửi về admin-post.php không chạy trên bản tĩnh (405): chặn gửi, báo đây là bản xem giao diện
+DEMO_JS = "alert('Bản xem giao diện chưa nhận được yêu cầu. Vui lòng gọi 02422 009 188 hoặc 0935 482 688 để được tư vấn.');return false;"
+def demo_forms(t):
+    return re.sub(r'<form\b(?![^>]*onsubmit)([^>]*action="[^"]*admin-post\.php[^"]*"[^>]*)>', lambda m: '<form' + m.group(1) + ' onsubmit="' + DEMO_JS + '">', t)
 for p in list(html_files()):
-    t = rd(p); u = pg.sub(r'\1\2-page-\3.html', t)
+    t = rd(p); u = demo_forms(pg.sub(r'\1\2-page-\3.html', t))
     if u != t: wr(p, u)
 for rel in need:
     if os.path.exists(rel): continue

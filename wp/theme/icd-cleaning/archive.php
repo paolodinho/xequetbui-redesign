@@ -10,7 +10,7 @@ $title = is_search() ? 'Kết quả tìm kiếm: ' . esc_html(get_search_query()
 <?php endforeach; ?></div>
 <?php the_posts_pagination(['prev_text' => '‹', 'next_text' => '›']); ?></div>
 <aside class="lay__s"><h4>Bài viết nổi bật</h4><div class="side-posts"><?php foreach (get_posts(icd_knowledge_args(6, ['orderby' => 'rand'])) as $sp) : $si = icd_img($sp->ID, 'thumbnail'); ?><a href="<?php echo esc_url(get_permalink($sp)); ?>"><?php if ($si) echo '<img loading="lazy" src="' . esc_url($si) . '" alt="">'; ?><span><?php echo esc_html(get_the_title($sp)); ?></span></a><?php endforeach; ?></div>
-<h4 class="lay__h2">Sản phẩm nổi bật</h4><div class="side-prods"><?php foreach (get_posts(['post_type' => 'product', 'numberposts' => 4, 'orderby' => 'rand']) as $p) : ?><a href="<?php echo esc_url(get_permalink($p)); ?>"><img loading="lazy" src="<?php echo esc_url(icd_img($p->ID)); ?>" alt=""><span><?php echo esc_html(get_the_title($p)); ?></span></a><?php endforeach; ?></div></aside></div>
+<h4 class="lay__h2">Sản phẩm nổi bật</h4><div class="side-prods"><?php foreach (get_posts(['post_type' => 'product', 'numberposts' => 10, 'orderby' => 'rand']) as $p) : ?><a href="<?php echo esc_url(get_permalink($p)); ?>"><img loading="lazy" src="<?php echo esc_url(icd_img($p->ID)); ?>" alt=""><span><?php echo esc_html(get_the_title($p)); ?></span></a><?php endforeach; ?></div></aside></div>
 <?php $paged_done = true; endif; ?>
 <?php if ($arts && empty($paged_done)) : ?><section class="box"><?php if (!$prods) : ?><div class="box__h"><h2><?php echo $title; ?></h2></div><?php else : ?><div class="box__h"><h2>Bài viết liên quan</h2></div><?php endif; ?>
 <div class="posts"><?php foreach ($arts as $a) : ?>

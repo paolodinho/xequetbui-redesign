@@ -698,3 +698,23 @@ a:hover,.nav .menu a:hover,.nav .menu .current-menu-item a:hover,.hd__top a:hove
 .bn__cats .cat-sub::before,.nav ul.nav__mega .cat-sub::before{content:"";position:absolute;left:-8px;top:0;width:8px;height:100%}
 .bn__cats .cat-sub li a,.nav ul.nav__mega .cat-sub li a{color:var(--ink)!important;background:#fff}
 .bn__cats .cat-sub li a:hover,.nav ul.nav__mega .cat-sub li a:hover{background:#0C914A!important;color:#fff!important}
+
+/* 31/10 khach (Doc gop y): trang chu 4 SP/hang anh lon, tieu de khung xanh, dich vu 1 dong, callfab 2 so, bang cho thue, anh danh sach 4:3 */
+.mb .grid--4 .card__img{aspect-ratio:1/1}
+.mb .grid--4 .card__img img{object-fit:contain;padding:8px}
+@media(max-width:1024px){.grid--4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mb .box__h{background:linear-gradient(90deg,#12A653 0%,#0C914A 100%);padding:8px 16px;border-radius:8px;margin-bottom:14px}
+.mb .box__h h2{color:#fff!important;line-height:28px}
+.mb .box__h .more{color:#fff!important;font-weight:700}
+.svc p{max-width:none}
+.callfab{cursor:default}
+.callfab__t a{color:#fff;display:block}.callfab__t a:hover{text-decoration:underline}
+.callfab__t b{font-size:17px}
+.prose table td,.prose table th{word-break:normal;overflow-wrap:break-word}
+.prose table td:first-child,.prose table th:first-child{min-width:3.6em}
+.prose table td ul{padding-left:18px;margin:0}
+.prose table td img{max-width:280px;height:auto}
+.pc img,.posts--1 .pc img,.pc__ph{width:240px;height:180px;object-fit:cover;object-position:center}
+@media(max-width:760px){.pc img,.posts--1 .pc img,.pc__ph{width:100%;height:auto;aspect-ratio:4/3}}
+.prose table tr>td:nth-child(3):nth-last-child(2),.prose table tr>th:nth-child(3):nth-last-child(2){width:46%!important}
+.prose table tr>td:first-child:nth-last-child(4),.prose table tr>th:first-child:nth-last-child(4){width:7%!important}

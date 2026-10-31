@@ -24,36 +24,37 @@ $cats = icd_top_cats();
 </div></section>
 
 <div class="mb"><div class="wrap">
-<?php $hid = icd_hot_ids(10); if (!$hid) $hid = get_posts(['post_type' => 'product', 'numberposts' => 10, 'fields' => 'ids', 'orderby' => 'menu_order date']);
+<?php $hid = icd_hot_ids(8); if (!$hid) $hid = get_posts(['post_type' => 'product', 'numberposts' => 8, 'fields' => 'ids', 'orderby' => 'menu_order date']);
 if ($hid) : ?>
 <section class="box box--hot" id="ban-chay">
   <div class="box__h"><h2>Sản phẩm bán chạy</h2><a class="more" href="<?php echo esc_url(home_url('/san-pham-ban-chay.html')); ?>">Xem thêm</a></div>
-  <div class="grid grid--5"><?php foreach (array_slice($hid, 0, 5) as $pid) icd_card($pid); ?></div>
-  <?php if (count($hid) > 5) : ?><div class="grid grid--5 grid--gap"><?php foreach (array_slice($hid, 5, 5) as $pid) icd_card($pid); ?></div><?php endif; ?>
+  <div class="grid grid--4"><?php foreach (array_slice($hid, 0, 4) as $pid) icd_card($pid); ?></div>
+  <?php if (count($hid) >= 8) : ?><div class="grid grid--4 grid--gap"><?php foreach (array_slice($hid, 4, 4) as $pid) icd_card($pid); ?></div><?php endif; ?>
 </section>
 <?php endif; $sid = icd_sale_ids(); if ($sid) : ?>
 <section class="box box--sale" id="khuyen-mai">
   <div class="box__h"><h2>Khuyến mại trong tháng</h2><a class="more" href="<?php echo esc_url(home_url('/san-pham-khuyen-mai.html')); ?>">Xem thêm</a></div>
-  <div class="grid grid--5"><?php foreach (array_slice($sid, 0, 5) as $pid) icd_card($pid); ?></div>
+  <div class="grid grid--4"><?php foreach (array_slice($sid, 0, 4) as $pid) icd_card($pid); ?></div>
 </section>
 <?php endif; ?>
 <?php foreach (preg_split('/\R/u', trim(icd('rows'))) as $n => $line) {
     if (!trim($line)) continue;
     [$slugs, $title, $kick, $bh, $cnt, $bimg] = array_pad(explode('|', $line), 6, '');
+    $cnt = max(4, intdiv(max(4, (int) $cnt), 4) * 4);
     $short = (int) $cnt <= 5 && file_exists(get_template_directory() . '/assets/img/banner-' . ($n + 1) . '-s.jpg');
     if (!trim($bimg) && file_exists(get_template_directory() . '/assets/img/banner-' . ($n + 1) . '.jpg')) { $bf = '/assets/img/banner-' . ($n + 1) . ($short ? '-s' : '') . '.jpg'; $bimg = get_template_directory_uri() . $bf . '?v=' . filemtime(get_template_directory() . $bf); }
-    $slugs = array_map('trim', explode(',', $slugs)); $ps = icd_products_by_cats($slugs, max(5, (int) $cnt)); if (!$ps) continue;
+    $slugs = array_map('trim', explode(',', $slugs)); $ps = icd_products_by_cats($slugs, $cnt); if (!$ps) continue; $ps = array_slice($ps, 0, max(4, intdiv(count($ps), 4) * 4));
     $first = get_term_by('slug', $slugs[0], 'product_cat'); $more = $first ? get_term_link($first) : home_url('/danh-muc-san-pham.html'); ?>
 <section class="box" id="row-<?php echo (int) $n; ?>">
   <div class="box__h"><h2><?php echo esc_html($title); ?></h2><a class="more" href="<?php echo esc_url($more); ?>">Xem thêm</a></div>
   <div class="box__b">
     <a class="promo promo--c" href="#bao-gia"><span class="promo__t"><?php echo esc_html($title); ?></span><strong><?php echo icd_chunks($bh); ?></strong><span class="promo__pic"><img loading="lazy" src="<?php echo esc_url(icd_cutout($ps[0]->ID)); ?>" alt="<?php echo esc_attr(get_the_title($ps[0])); ?>"></span><span class="promo__u"><i>Hàng chính hãng, đủ CO CQ</i><i>Bảo hành, hỗ trợ kỹ thuật</i><i>Giao hàng, lắp đặt tận nơi</i></span><span class="promo__c">Nhận báo giá: <?php echo esc_html(icd('hotline')); ?></span></a>
-    <div class="grid grid--5"><?php foreach ($ps as $p) icd_card($p); ?></div>
+    <div class="grid grid--4"><?php foreach ($ps as $p) icd_card($p); ?></div>
   </div>
 </section>
 <?php } ?>
 
-<?php $ns = get_posts(icd_knowledge_args(4)) ?: get_posts(['numberposts' => 4]); if ($ns) : $f = array_shift($ns); ?>
+<?php $ns = get_posts(icd_knowledge_args(6)) ?: get_posts(['numberposts' => 6]); if ($ns) : $f = array_shift($ns); ?>
 <section class="box">
   <div class="box__h"><h2>Kiến thức và tư vấn chọn máy</h2><a class="more" href="<?php echo esc_url(home_url('/tu-van.html')); ?>">Xem thêm</a></div>
   <div class="news">
